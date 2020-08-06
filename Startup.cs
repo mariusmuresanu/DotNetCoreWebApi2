@@ -26,6 +26,7 @@ namespace DotNetCoreWebApi2
         {
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddCors();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -50,6 +51,8 @@ namespace DotNetCoreWebApi2
                 app.UseHsts();
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             //if (!env.IsDevelopment())
@@ -67,6 +70,8 @@ namespace DotNetCoreWebApi2
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
+
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -79,6 +84,8 @@ namespace DotNetCoreWebApi2
                 //    spa.UseAngularCliServer(npmScript: "start");
                 //}
             });
+
+            
         }
     }
 }
