@@ -1,4 +1,5 @@
 using DotNetCoreWebApi2.Models;
+using DotNetCoreWebApi2.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,7 @@ namespace DotNetCoreWebApi2
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

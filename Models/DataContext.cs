@@ -8,5 +8,6 @@ namespace DotNetCoreWebApi2.Models
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
